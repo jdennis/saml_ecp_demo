@@ -724,7 +724,7 @@ class ECPFlow:
 
         headers = {
             'Content-Type': 'text/xml',
-            }
+        }
 
         response = self.session.post(self.idp_endpoint, headers=headers,
                                      auth=auth, data=self.idp_request_text)
@@ -898,8 +898,9 @@ class ECPFlow:
         returned.'''
 
         description = banner('Send PAOS response to SP, if successful SP resource is returned')
-        LOG.info('PAOS response sent to SP\nSP Endpoint: %s\n' % (
-            self.sp_response_consumer_url))
+
+        LOG.info('%s\nSP Endpoint: %s\n' % (
+            banner('PAOS response sent to SP'), self.sp_response_consumer_url))
         if 'saml-message' in self.log_categories:
             LOG.info('%s' % format_xml_from_object(self.sp_response_xml))
 
@@ -991,7 +992,7 @@ def main():
                         help='Authentication method used when forwarding '
                         'authnRequest to IdP')
 
-    parser.add_argument('-l', '--log-category',
+    parser.add_argument('-l', '--log-categories',
                         action=LogCategoryAction, dest='log_categories',
                         default=default_log_categories,
                         help=log_categories_help)

@@ -744,6 +744,10 @@ class ECPFlow:
         LOG.info(format_http_request_response(response, self.log_categories,
                                               description))
 
+        if 'saml-message' in self.log_categories:
+            LOG.info('SOAP message from ECP to IdP\n%s' %
+                     format_xml_from_object(self.idp_request_xml))
+
     def process_idp_response(self):
         '''We've received a response from the IdP and must process it by
         extracting pieces of data to be used in later steps (or for

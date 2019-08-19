@@ -11,7 +11,13 @@ educate implementors about ECP and perform a complete ECP
 authentication flow with the ability to dump all protocol interactions
 for the purpose of education and/or diagnosing ECP transactions.
 
-All documenation can be found in the ecp_demo script.
+All documenation can be found in the ecp_demo script. The script also
+supports the --help command line argument and will print out usage
+information.
+
+```shell
+% saml_ecp_demo --help
+```
 
 An example of the ecp_demo output can be found in ecp_demo.log
 

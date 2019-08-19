@@ -6,12 +6,12 @@ auththentication. It is commonly used by command line tools to
 authenticate via SAML.
 
 ECP is often misunderstood and example implementations are hard to
-find. ecp_demo is a Python3 implementation of ECP designed both to
+find. saml_ecp_demo is a Python3 implementation of ECP designed both to
 educate implementors about ECP and perform a complete ECP
 authentication flow with the ability to dump all protocol interactions
 for the purpose of education and/or diagnosing ECP transactions.
 
-All documenation can be found in the ecp_demo script. The script also
+All documenation can be found in the saml_ecp_demo script. The script also
 supports the --help command line argument and will print out usage
 information.
 
@@ -19,7 +19,7 @@ information.
 % saml_ecp_demo --help
 ```
 
-An example of the ecp_demo output can be found in ecp_demo.log
+An example of the saml_ecp_demo output can be found in saml_ecp_demo.log
 
 ## Installing and Running:
 

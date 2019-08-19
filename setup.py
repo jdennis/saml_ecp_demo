@@ -1,10 +1,11 @@
+#!/usr/bin/python3
+
 from setuptools import setup, find_packages
 setup(
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
     python_requires='>=3.0',
     name="saml_ecp_demo",
-    version="0.2",
     author = 'John Dennis',
     author_email = 'jdennis@sharpeye.com',
     description = 'SAML ECP demo',

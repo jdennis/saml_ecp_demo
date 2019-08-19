@@ -11,9 +11,9 @@ educate implementors about ECP and perform a complete ECP
 authentication flow with the ability to dump all protocol interactions
 for the purpose of education and/or diagnosing ECP transactions.
 
-All documenation can be found in the saml_ecp_demo.py. The script also
-supports the --help command line argument and will print out usage
-information.
+All documenation can be found in saml_ecp_demo.py, it is extensive and
+worth reading. The script also supports the --help command line
+argument and will print out usage information.
 
 ```shell
 % saml_ecp_demo --help

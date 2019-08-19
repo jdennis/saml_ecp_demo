@@ -334,6 +334,44 @@ def format_xml_from_string(xml):
     root = etree.fromstring(xml)
     return format_xml_from_object(root)
 
+def _format_http_request_response(buf, response, log_categories):
+    '''Python Requests encapsulates a HTTP request & response in their
+    Response object. This function pretty prints the request/response
+    information and returns it as a string.'''
+
+    request = response.request
+
+    buf.write('\nRequest:\n')
+    buf.write('  url = %s\n' % request.url)
+    buf.write('  method = %s\n' % request.method)
+    buf.write('  Headers:\n')
+    for hdr in sorted(request.headers.keys()):
+        buf.write('    %s: %s\n' % (hdr, request.headers[hdr]))
+    if request.body and 'http-content' in log_categories:
+        buf.write('  Body:\n')
+        buf.write('    %s' % (request.body))
+
+    buf.write('\nResponse:\n')
+    buf.write('  Status = %s\n' % response.status_code)
+    buf.write('  Headers:\n')
+    for hdr in sorted(response.headers.keys()):
+        buf.write('    %s: %s\n' % (hdr, response.headers[hdr]))
+
+
+    if 'http-content' in log_categories:
+        content_type = response.headers.get('Content-Type')
+        if content_type and response.content:
+            if is_content_xml(content_type):
+                formatted_content = format_xml_from_string(response.text)
+                formatted_content = textwrap.indent(formatted_content, '    ')
+            elif is_content_text(content_type):
+                formatted_content = response.text
+                formatted_content = textwrap.indent(formatted_content, '    ')
+            else:
+                formatted_content = response.text # FIXME
+            buf.write('  Content:\n')
+            buf.write(formatted_content)
+
 def format_http_request_response(response, log_categories, msg=None):
     '''Python Requests encapsulates a HTTP request & response in their
     Response object. This function pretty prints the request/response
@@ -348,39 +386,11 @@ def format_http_request_response(response, log_categories, msg=None):
             buf.write('\n')
 
         if 'http-request-response' in log_categories:
-            buf.write('Request:\n')
-            buf.write('  url = %s\n' % request.url)
-            buf.write('  method = %s\n' % request.method)
-            buf.write('  Headers:\n')
-            for hdr in sorted(response.headers.keys()):
-                buf.write('    %s: %s\n' % (hdr, response.headers[hdr]))
-            if request.body:
-                buf.write('  Body:\n')
-                buf.write('    %s' % (request.body))
-
-            buf.write('\nResponse:\n')
-            buf.write('  Status = %s\n' % response.status_code)
-            buf.write('  Headers:\n')
-            for hdr in sorted(response.headers.keys()):
-                buf.write('    %s: %s\n' % (hdr, response.headers[hdr]))
-
-
-            if 'http-content' in log_categories:
-                content_type = response.headers.get('Content-Type')
-                if content_type and response.content:
-                    if is_content_xml(content_type):
-                        formatted_content = format_xml_from_string(response.text)
-                        formatted_content = textwrap.indent(formatted_content, '    ')
-                    elif is_content_text(content_type):
-                        formatted_content = response.text
-                        formatted_content = textwrap.indent(formatted_content, '    ')
-                    else:
-                        formatted_content = response.text # FIXME
-                    buf.write('  Content:\n')
-                    buf.write(formatted_content)
+            for r in response.history:
+                _format_http_request_response(buf, r, log_categories)
+            _format_http_request_response(buf, response, log_categories)
 
         formatted = buf.getvalue()
-
     return formatted
 
 def is_content_xml(content_type):

@@ -2,8 +2,9 @@ from setuptools import setup, find_packages
 setup(
     use_scm_version=False,
     setup_requires=['setuptools_scm'],
+    python_requires='>=3.0',
     name="saml_ecp_demo",
-    version="0.1",
+    version="0.2",
     author = 'John Dennis',
     author_email = 'jdennis@sharpeye.com',
     description = 'SAML ECP demo',
@@ -22,10 +23,12 @@ setup(
     classifiers = [
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 3',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
         'Intended Audience :: Information Technology',
-        'Topic :: SAML',
         'Topic :: Utilities',
+        'Topic :: Security',
+        'Topic :: Internet',
         ]
 )

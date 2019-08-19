@@ -46,6 +46,10 @@ This will create an entry in the appropriate bin directory called
 "saml_ecp_demo" which can then be run by typing that name on the
 command line.
 
+```shell
+% saml_ecp_demo ...
+```
+
 > **Note:** The --user tells pip to install in the user's home directory not
 > in the system directories which are often managed by the operating
 > system package manager and would require root access for

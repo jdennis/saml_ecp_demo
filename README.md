@@ -79,12 +79,12 @@ options and get basic usage info.
 
 The script requires 4 pieces of information to run:
 
--s --sp-resource:
+-s | --sp-resource:
 
 This is the URL of a resource at the SP protected by SAML authentication.
 It is what the ECP client wants and will use ECP to obtain.
 
--i --idp-endpoint:
+-i | --idp-endpoint:
 
 The ECP client selects the IdP. For the purposes of this script we
 explicitly supply the IdP or more accurately the SingleSignOnService
@@ -94,11 +94,11 @@ element in the IdP metadata which also has a Binding attribute of
 "urn:oasis:names:tc:SAML:2.0:bindings:SOAP". The Location attribute
 will be the URL to be used as the --idp-endpoint.
 
--u --user:
+-u | --user:
 
 The user name the IdP will authenticate.
 
--p' --password:
+-p | --password:
 
 The user password used to authenticate with. If it's not supplied
 on the command line the tool will prompt for it.
